@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spending Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Modal Styles */
+        .modal-bg {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+
+        .modal {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .modal p {
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .highlight {
+            color: #1D00FF;
+            font-weight: 600;
+        }
+
+        .modal-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 100px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-close {
+            background-color: #FF4B4B;
+            color: white;
+        }
+
+        .btn-reset {
+            background-color: #0056FF;
+            color: white;
+        }
+
+        /* Hide modal by default */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Modal Structure -->
+    <div id="modalBg" class="modal-bg hidden">
+        <div class="modal">
+            <h2>Welcome</h2>
+            <p>Dear <span class="highlight" id="userName">User</span>, you have been given $20,000 to withdraw every day. Don't click on the reset button until tomorrow, else you will be banned. Join group <a href="#" class="highlight">Here</a>.</p>
+            <div class="modal-btns">
+                <button class="btn btn-reset">Reset</button>
+                <button class="btn btn-close" onclick="closeModal()">Close</button>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="flex justify-between items-center px-4 py-2">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-user-circle text-3xl text-yellow-500"></i>
+            <h1 class="text-xl font-bold">Hi, <span id="greetingName"></span></h1>
+        </div>
+        <i class="fas fa-bell text-2xl"></i>
+    </div>
+
+    <!-- Card Section -->
+    <div class="bg-blue-600 text-white rounded-xl mx-4 p-4">
+        <h2 class="text-lg">Today's Available</h2>
+        <div class="flex justify-between items-center mt-2">
+            <p class="text-3xl font-bold">$20,000</p>
+            <a href="transfer.html">
+                <button class="bg-white text-black rounded px-4 py-2">Withdraw</button>
+            </a>
+        </div>
+        <p class="mt-4">Daily spend target: $20,000</p>
+    </div>
+
+    <!-- Icon Section -->
+    <div class="grid grid-cols-3 gap-4 text-center mt-6 px-4">
+        <!-- Reset Button -->
+        <div>
+            <i class="fas fa-undo text-4xl"></i>
+            <p class="mt-2 font-bold">Reset</p>
+        </div>
+        <!-- Buy BPC Button -->
+        <div>
+           
+            <a href="BWC.html"> <i class="fas fa-coins text-4xl"></i></a>
+            <p class="mt-2 font-bold">BWC</p>
+        </div>
+        <!-- Watch Button -->
+        <div>
+            <i class="fas fa-chart-line text-4xl"></i>
+            <p class="mt-2 font-bold">Watch</p>
+        </div>
+        <!-- Contact Button -->
+        <div>
+           
+            <a href="https://wa.me/+16613087210"><i class="fas fa-flask text-4xl"></i> </a>
+            <p class="mt-2 font-bold">Contact</p>
+        </div>
+        <!-- Group Button -->
+        <div>
+            <i class="fas fa-globe text-4xl"></i>
+            <p class="mt-2 font-bold">Group</p>
+        </div>
+        <!-- Faq Button -->
+        <div>
+            <a href="faq.html"> <i class="fas fa-cubes text-4xl"></i></a>
+            <p class="mt-2 font-bold">Faq</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-blue-600 h-0 mt-8"></div>
+
+    <script>
+        // Function to show the modal when the page loads
+        window.onload = function() {
+            // Retrieve the user's name from localStorage
+            const userName = localStorage.getItem('userName');
+            if (userName) {
+                document.getElementById('userName').textContent = userName; // Set the username in the modal
+                document.getElementById('greetingName').textContent = userName;
+            }
+            document.getElementById('modalBg').classList.remove('hidden');
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('modalBg').classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>

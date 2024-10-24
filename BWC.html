@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefit Pay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f5;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #2C2E64;
+            padding: 20px;
+            text-align: left;
+        }
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+        .form-container {
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input[type="text"]::placeholder, input[type="email"]::placeholder {
+            color: #aaa;
+        }
+        .amount {
+            color: #555;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .btn {
+            width: 100%;
+            text-decoration: none;
+            background-color: #9c9dab;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #212355;
+        }
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .footer img {
+            width: 150px;
+        }
+        .gh {
+            display: flex;
+            margin-left: 23px;
+            padding-top: 15px;
+        }
+        .btc-address {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+        .btc-address input {
+            display: flex;
+            border: none;
+            padding-top: 10px;
+            background: none;
+            width: 100%;
+            padding: 0;
+            color: #333;
+            font-size: 14px;
+        }
+        .btc-address button {
+            background-color: #2C2E64;
+            color: white;
+            border: none;
+            padding: 10px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btc-address button:hover {
+            background-color: #212355;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Benefit Pay</h1>
+    </div>
+    <h5 class="gh">All Payment Should Be Made to the BTC Address Below</h5>
+  
+    <!-- BTC Address Section -->
+    <div class="btc-address">
+        <input type="text" id="btcAddress" value="15yZ1GmoUGZgs2qH3eMp4tnU9snF4rt25X" readonly>
+        <button onclick="copyBtcAddress()">Copy</button>
+    </div>
+
+    <div class="form-container">
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="text" id="amount" placeholder="$100">
+        </div>
+
+        <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" placeholder="Jessica Elizabeth">
+        </div>
+      
+        <div class="form-group">
+            <label for="email">Your Email Address</label>
+            <input type="email" id="email" placeholder="goldenagecommunitycare@gmail.com">
+        </div>
+        <a href="homepage.html"><button class="btn" onclick="confirmPayment()">Submit</button></a>
+    </div>
+
+</div>
+
+<script>
+    function copyBtcAddress() {
+        /* Get the BTC address input field */
+        var btcInput = document.getElementById("btcAddress");
+
+        /* Select the text field */
+        btcInput.select();
+        btcInput.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(btcInput.value);
+
+        /* Alert the copied text */
+        alert("BTC Address copied: " + btcInput.value);
+    }
+
+  
+</script>
+
+</body>
+</html>

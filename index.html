@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benefit Pay Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F4F1EB;
+    }
+
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      color: #1D00FF;
+      text-shadow: 2px 2px 5px #000;
+      letter-spacing: 2px;
+    }
+
+    .input-field {
+      border: 1px solid #000;
+      border-radius: 8px;
+      padding: 12px 20px;
+      width: 100%;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .input-field::placeholder {
+      color: #888;
+    }
+
+    .login-btn {
+      background-color: #000;
+      color: #fff;
+      padding: 12px;
+      width: 100%;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .forgot-password {
+      color: #1D00FF;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col items-center justify-center h-screen">
+    <div class="text-center mb-10">
+      <h1 class="logo">Benefit PAY</h1>
+      <p class="text-lg">Login or create an account to continue</p>
+    </div>
+
+    <div class="w-80">
+      <input type="text" name="fullname" id="name" class="input-field" placeholder="Enter Full Name" required>
+      <input type="email" name="email" id="email" class="input-field" placeholder="Enter Email" required />
+      <input type="password" name="password" id="password" class="input-field" placeholder="Enter Password" required />
+      <button class="login-btn" onclick="handleLogin()">Login/Register</button>
+    </div>
+
+    <a href="#" class="forgot-password">Forgot Password?</a>
+  </div>
+
+  <script>
+    function handleLogin() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (name && email && password) {
+        // Check if the user has already registered before
+        const existingUser = localStorage.getItem('userEmail');
+
+        if (existingUser === email) {
+          alert("Login successful.");
+        } else {
+          alert("Registration successful.");
+          // Store the full name and email in localStorage
+          localStorage.setItem('userName', name);
+          localStorage.setItem('userEmail', email);
+        }
+
+        // Redirect to homepage (spending dashboard)
+        window.location.href = "homepage.html";
+      } else {
+        alert("Please fill in all fields.");
+      }
+    }
+  </script>
+
+  <div class="w-80">
+    <a href="transferp2.html"><button class="w-full bg-blue-600 text-white font-bold py-3 mt-4 rounded-md">Submit</button></a>
+  </div>
+</body>
+</html>

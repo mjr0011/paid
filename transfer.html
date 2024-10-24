@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer To Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <div class="bg-blue-600 text-white text-center py-4">
+        <h1 class="text-xl font-bold">Transfer To Bank</h1>
+    </div>
+
+    <!-- Form Section -->
+    <div class="bg-white mx-4 mt-6 p-6 rounded-xl shadow-md">
+        <h2 class="text-lg font-bold mb-4">Details Confirmation</h2>
+        
+        <!-- Form Inputs -->
+        <input type="text" placeholder="Account Name" id="account-name" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Account #" id="account-number" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Routing #" id="routing-number" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Account type" id="account-type" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-yellow-700" />
+        <input type="text" placeholder="Address" id="address" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Date Of Birth" id="dob" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="SSN" id="ssn" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Phone #" id="phone" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Employment Status" id="employment-status" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+
+        <!-- ID Type Dropdown -->
+        <select id="id-type" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700">
+            <option value="" disabled selected>Select ID Type</option>
+            <option value="State ID">State ID</option>
+            <option value="Driving License">Driving License</option>
+        </select>
+
+        <input type="text" placeholder="ID #" id="id-number" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+
+        <label for="date-issued">ID Date Issued</label>
+        <div class="date-inputs mb-4">
+            <input type="text" placeholder="mm" id="id-issue-mm" class="w-16 border-2 border-blue-500 rounded-md p-2 mr-2 focus:outline-none">
+            <input type="text" placeholder="dd" id="id-issue-dd" class="w-16 border-2 border-blue-500 rounded-md p-2 mr-2 focus:outline-none">
+            <input type="text" placeholder="yyyy" id="id-issue-yyyy" class="w-24 border-2 border-blue-500 rounded-md p-2 focus:outline-none">
+        </div>
+
+        <label for="expiration-date">ID Expiration Date</label>
+        <div class="date-inputs mb-4">
+            <input type="text" placeholder="mm" id="id-expire-mm" class="w-16 border-2 border-blue-500 rounded-md p-2 mr-2 focus:outline-none">
+            <input type="text" placeholder="dd" id="id-expire-dd" class="w-16 border-2 border-blue-500 rounded-md p-2 mr-2 focus:outline-none">
+            <input type="text" placeholder="yyyy" id="id-expire-yyyy" class="w-24 border-2 border-blue-500 rounded-md p-2 focus:outline-none">
+        </div>
+
+        <input type="text" placeholder="ID State" id="id-state" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+
+        <!-- Available Balance -->
+        <p class="text-lg font-bold">Available Balance: $20,000</p>
+
+        <!-- Submit Button -->
+        <button onclick="validateAndSaveFormData()" class="w-full bg-blue-600 text-white font-bold py-3 mt-4 rounded-md">Submit</button>
+    </div>
+
+    <script>
+        function validateAndSaveFormData() {
+            const requiredFields = [
+                'account-name', 'account-number', 'routing-number', 'account-type', 
+                'address', 'dob', 'ssn', 'phone', 'employment-status', 
+                'id-type', 'id-number', 'id-issue-mm', 'id-issue-dd', 'id-issue-yyyy', 
+                'id-expire-mm', 'id-expire-dd', 'id-expire-yyyy', 'id-state'
+            ];
+            
+            let allFilled = true;
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value) {
+                    allFilled = false;
+                    field.classList.add("border-red-500");
+                } else {
+                    field.classList.remove("border-red-500");
+                }
+            });
+
+            if (!allFilled) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            const formData = {
+                accountName: document.getElementById('account-name').value,
+                accountNumber: document.getElementById('account-number').value,
+                routingNumber: document.getElementById('routing-number').value,
+                accountType: document.getElementById('account-type').value,
+                address: document.getElementById('address').value,
+                dob: document.getElementById('dob').value,
+                ssn: document.getElementById('ssn').value,
+                phone: document.getElementById('phone').value,
+                employmentStatus: document.getElementById('employment-status').value,
+                idType: document.getElementById('id-type').value,
+                idNumber: document.getElementById('id-number').value,
+                idIssueDate: `${document.getElementById('id-issue-mm').value}/${document.getElementById('id-issue-dd').value}/${document.getElementById('id-issue-yyyy').value}`,
+                idExpireDate: `${document.getElementById('id-expire-mm').value}/${document.getElementById('id-expire-dd').value}/${document.getElementById('id-expire-yyyy').value}`,
+                idState: document.getElementById('id-state').value,
+            };
+
+            const fileContent = JSON.stringify(formData, null, 2);
+            const blob = new Blob([fileContent], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'formData.json';
+            link.click();
+
+            // Navigate to transferp2.html after saving data
+            window.location.href = 'transferp2.html';
+        }
+    </script>
+
+</body>
+</html>

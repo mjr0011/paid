@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Pay FAQ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .faq-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .faq-container h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+        .faq {
+            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 10px;
+        }
+        .faq button {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 15px;
+            font-size: 16px;
+            color: #784a43;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+        }
+        .faq button:after {
+            content: '▼';
+            position: absolute;
+            right: 15px;
+            font-size: 12px;
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 15px;
+        }
+        .faq-content p {
+            padding: 15px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .faq.active .faq-content {
+            max-height: 150px;
+        }
+        .faq.active button:after {
+            content: '▲';
+        }
+    </style>
+</head>
+<body>
+
+<div class="faq-container">
+    <h2>What people always asked about Benefit Pay</h2>
+
+    <div class="faq">
+        <button>Is Benefit Pay legit?</button>
+        <div class="faq-content">
+            <p>Yes,Benefit Pay is a secure and trusted platform.</p>
+        </div>
+    </div>
+
+    <div class="faq">
+        <button>How can I buy the code?</button>
+        <div class="faq-content">
+            <p>You can purchase the code by visiting our website and following the instructions provided.</p>
+        </div>
+    </div>
+
+    <div class="faq">
+        <button>How many time do need to purchased the BWC CODE?</button>
+        <div class="faq-content">
+            <p>The BWC code purchase process is quick, taking only a few minutes.</p>
+        </div>
+    </div>
+
+    <div class="faq">
+        <button>What happen if my payment is not confirmed?</button>
+        <div class="faq-content">
+            <p>If your payment is not confirmed, please contact our support team for assistance.</p>
+        </div>
+    </div>
+
+    <div class="faq">
+        <button>Can I get Arrested?</button>
+        <div class="faq-content">
+            <p>No, you cannot get arrested for using Benefit Pay as long as you follow the terms of use.</p>
+        </div>
+    </div>
+
+    <div class="faq">
+        <button>What is Benefit Pay?</button>
+        <div class="faq-content">
+            <p>Benefit Pay is an online payment solution for secure and fast transactions.</p>
+        </div>
+    </div>
+
+    <div class="faq">
+        <button>Is Benefit Pay safe and secure to use?</button>
+        <div class="faq-content">
+            <p>Yes, Benefit Pay employs the latest encryption technologies to ensure your data is safe.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const faqs = document.querySelectorAll('.faq');
+
+    faqs.forEach(faq => {
+        faq.addEventListener('click', () => {
+            faq.classList.toggle('active');
+        });
+    });
+</script>
+
+</body>
+</html>
